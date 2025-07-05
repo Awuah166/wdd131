@@ -95,6 +95,11 @@ nav a:hover {
     color: #fff;
 }
 
+h1 {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
 /* IMAGE & CONTENT */
 .flag-box {
     display: flex;
