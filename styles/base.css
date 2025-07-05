@@ -1,0 +1,156 @@
+:root {
+    --primary-color: #272757; /* Dark Blue */
+    --secondary-color: #8686ac; /* Light Blue */
+    --accent1-color: #505081; /* Medium Blue */
+    --accent2-color: #0F0E47; /* Darker Blue */
+    --font-family: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+span {
+    display: block;
+}
+
+#course-title {
+    text-align: center;
+    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    color: #fff;
+    font-family: "Abril Fatface", cursive;
+    width: auto;
+}
+
+nav {
+    background-color: var(--accent1-color);
+    padding : 0 2rem; /* Adds space left and right */
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem 0;
+    ;
+    
+}
+
+nav ul li {
+    flex: 1 1 100%;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-family);
+    display: inline-block;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    transform: scale(1.12);
+    z-index: 1;
+}
+
+nav a:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+}
+
+/* FOR LARGER VIEWS */
+@media (min-width: 640px) {
+
+}
+
+/* MAIN LAYOUT */
+.main-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+}
+
+
+
+.card h2 {
+    background-color: var(--accent2-color);
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin-top: 20px;
+    color: #fff;
+}
+
+/* IMAGE & CONTENT */
+.flag-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.flag-box img {
+    width: 300px;
+    border-radius: 8px;
+}
+
+
+
+.card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card li a {
+    color: #0033cc;
+    text-decoration: none;
+}
+
+.card li a:hover{
+    text-decoration: underline;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.profile p {
+    text-align: left;
+    margin: 0;
+    
+}
+
+.profile img {
+    order: 2;
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    margin-left: 0;
+}
+
+
+footer {
+    background-color: var(--primary-color);
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
