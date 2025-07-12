@@ -1,17 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.navigation');
 
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('open');
-        // Accessibility
-        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-        hamburger.setAttribute('aria-expanded', !expanded);
-    });
-});
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('open');
+            // Accessibility
+            const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', !expanded);
+        });
+    }
 
-document.addEventListener("DOMContentLoaded", function() {
+    // Footer year and last modified
     const footer = document.querySelector("footer");
     if (footer) {
         const year = new Date().getFullYear();
