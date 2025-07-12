@@ -1,3 +1,16 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.navigation');
+
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('open');
+        // Accessibility
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', !expanded);
+    });
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     const footer = document.querySelector("footer");
     if (footer) {
@@ -11,21 +24,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-
-// Hamburger menu functionality
-    const menubutton = document.querySelector('.menubutton');
-    const menuitems = document.querySelector('.menuitems');
-
-    if (menubutton && menuitems) {
-        menubutton.addEventListener('click', () => {
-            menuitems.classList.toggle('open');
-            // Toggle hamburger/close icon
-            if (menuitems.classList.contains('open')) {
-                menubutton.textContent = '✖'; // Close icon
-                menubutton.setAttribute('aria-label', 'Close Menu');
-            } else {
-                menubutton.textContent = '☰'; // Hamburger icon
-                menubutton.setAttribute('aria-label', 'Open Menu');
-            }
-    });
-}

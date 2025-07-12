@@ -4,22 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WDD 131 - Temple Albums</title>
-    <meta name="description" content="This page contains albums of temples.">
+    <meta name="description" content="A collection of temple albums showcasing various temples.">
     <meta name="author" content="Awuah Dennis">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alex+Brush&family=Alice&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/temple.css">
     <link rel="stylesheet" href="styles/temple-large.css">
+    <link rel="stylesheet" href="styles/temple.css">
     <script src="scripts/temple.js" defer></script>
 </head>
 <body>
     <header>
-        <h1>Temple Album</h1>
+        <h2>Temple Album</h2>
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <nav>
-            <button class ="menubutton" aria-label="Open Menu">&#9776;</button>
-            <ul class="menuitems">
-                <li><a href="temple.html">Home</a></li>
+            <ul class="navigation" id="navigation">
+                <li><a href="#">Home</a></li>
                 <li><a href="#">Old</a></li>
                 <li><a href="#">New</a></li>
                 <li><a href="#">Large</a></li>
@@ -30,6 +34,12 @@
 
     <main>
         <h1>Home</h1>
+
+        <figure>
+            <img src="Images/2-Barranquilla-Columblia-Temple.jpg" alt="2-Barranquilla-Columblia-Temple">
+            <figcaption>Barranquilla Columblia Temple</figcaption>
+        </figure>
+
         <figure>
             <img src="Images/aba-nigeria-temple.jpg" alt="Aba Nigeria Temple">
             <figcaption>Aba Nigeria Temple</figcaption>
@@ -59,8 +69,18 @@
             <img src="Images/apia-samoa-temple.jpg" alt="Apia Samoa Temple">
             <figcaption>Apia Samoa Temple</figcaption>
         </figure>
-    </main>
 
+        <figure>
+            <img src="Images/paraguy-temple.jpeg" alt="Asuncion Paraguay Temple">
+            <figcaption>Asuncion Paraguay Temple</figcaption>
+        </figure>
+
+        <figure>
+            <img src="Images/peru-temple.jpeg" alt="Arequipa Peru Temple">  
+            <figcaption>Arequipa Peru Temple</figcaption>
+        </figure>
+    </main>
+    
     <footer>
         <p><span id="currentyear">&copy;💲 Awuah Dennis 💲 Ghana</span></p>
         <p id="lastModified"></p>
