@@ -1,17 +1,13 @@
 /* CSS Custom Properties (Global Variables) */
 :root {
-    --primary-color: #d94444;
-    --secondary-color: #1c5e3a;
-    --backgr    .hero {
-        height: 60vh;
-        border-bottom: 8px solid var(--secondary-color);
-        margin-bottom: 2rem;
-    }color: #f4f4f4;
-    --text-color: #333;
-    --light-text: #555;
-    --white: #ffffff;
-    --main-font: 'Montserrat', sans-serif;
-    --border-radius: 5px;
+    --primary-color: #d94444;      /* Red theme color */
+    --secondary-color: #1c5e3a;    /* Green theme color */
+    --background-color: #f4f4f4;   /* Page background */
+    --text-color: #333;            /* Main text color */
+    --light-text: #555;            /* Lighter text color */
+    --white: #ffffff;              /* White color */
+    --main-font: 'Montserrat', sans-serif; /* Main font */
+    --border-radius: 5px;          /* Standard border radius */
 }
 
 /* Wider view */
