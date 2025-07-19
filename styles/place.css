@@ -69,6 +69,18 @@ main {
     text-align: center;
 }
 
+.data-section::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: var(--border-radius);
+}
+
 .weather-section {
     position: absolute;
     bottom: 2rem;
@@ -77,6 +89,18 @@ main {
     padding: 1.5rem;
     max-width: 300px;
     text-align: center;
+}
+
+.weather-section::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: var(--border-radius);
 }
 
 /* Section styling */
