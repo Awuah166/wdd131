@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place - Awuah Dennis</title>
+    <meta name="description" content="Awuah Dennis's place page showcasing various locations and their significance.">
+    <meta name="author" content="Awuah Dennis">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/place.css">
+    <script src="scripts/place.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Ghana</h1>
+        
+    </header>
+
+    <main>
+        <div class="hero">
+            <picture>
+                <source media="(min-width: 1000px)" srcset="Images/kwasi-ansong-bamfo-large.webp">
+                <source media="(min-width: 500px)" srcset="Images/kwasi-ansong-bamfo-medium.webp">
+                <img src="Images/kwasi-ansong-bamfo-small.webp" alt="Kwasi Ansong Bamfo" width="500" height="333">
+            </picture>
+        </div>
+
+        <section class="data-section">
+            <h2>Data</h2>
+            <ul>
+                <li>Capital: Accra</li>
+                <li>Population: Approximately 31 million</li>
+                <li>Languages: English, Twi, Ewe, Dagbani, etc...</li>
+                <li>Currency: Ghanaian Cedi (GHS)</li>
+                <li>Independence: March 6, 1957</li>
+                <li>Time Zone: GMT (UTC+0)</li>
+                <li>Calling Code: +233</li>
+                <li>Major Religions: Christianity, Islam, Traditional African religions</li>
+
+        </section>
+
+        <section class="weather-section">
+            <h2>Weather <img src="Images/weather-icon.svg" alt="Weather icon"></h2>
+            <ul>
+                <li>Temperature: 27°C (81°F)</li>
+                <li>Rainy Season: April to October</li>
+                <li>Dry Season: November to March</li>
+                <li>Conditions: Generally warm and tropical</li>
+                <li>Wind: 10-15 km/h (6-9 mph)</li>
+                <li>Windchill: <span id="windchill">N/A</span></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p><span id="currentyear">&copy; 💲 Awuah Dennis 💲. Accra, Ghana.</span></p>
+        <p id="last-updated"></p>
+    </footer>
+</body>
+</html>
