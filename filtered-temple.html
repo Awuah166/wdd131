@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 131 - Temple Albums</title>
+    <meta name="description" content="A collection of temple albums showcasing various temples.">
+    <meta name="author" content="Awuah Dennis">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/filtered-temple-large.css">
+    <link rel="stylesheet" href="styles/filtered-temple.css">
+    <script src="scripts/filtered-temple.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Temple Album</h1>
+        <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav>
+            <ul class="navigation" id="navigation">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Old</a></li>
+                <li><a href="#">New</a></li>
+                <li><a href="#">Large</a></li>
+                <li><a href="#">Small</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Temple Home</h2>
+        
+        <div id="temple-container" class="temple-grid">
+            <!-- Temple images will be dynamically inserted here -->
+        </div>
+    </main>
+    
+    <footer>
+        <p><span id="currentyear">&copy; 💲 Awuah Dennis 💲 Ghana</span></p>
+        <p id="lastModified"></p>
+    </footer>
+</body>
+</html>
