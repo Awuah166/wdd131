@@ -1,0 +1,55 @@
+body {
+    padding: 5%;
+}
+
+/* Remove spacing between table cells */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style table headers and cells */
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* Style table headers */
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Style elements with colspan attribute to have black background */
+th[colspan] {
+    background-color: black;
+    color: white;
+    font-size: 1.2em;
+    padding: 15px;
+    border: none;
+}
+
+/* Style blank cell to match colspan */
+.blank {
+    background-color: black;
+    color: white;
+    border: none;
+}
+
+/* Zebra striping for table rows */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Style the caption */
+caption {
+    caption-side: bottom;
+    font-style: italic;
+    margin-top: 10px;
+    color: #666;
+}
