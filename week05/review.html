@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Confirmation</title>
+    <meta name="description" content="Confirmation page for submitted product reviews.">
+    <meta name="author" content="Awuah Dennis">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/form.css">
+    <script src="scripts/review.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Review Submitted</h1>
+    </header>
+
+    <main>
+        <div class="confirmation-container">
+            <h2>Thank you for your review!</h2>
+            <p>Your product review has been successfully submitted.</p>
+            
+            <div class="review-counter">
+                <h3>Review Counter</h3>
+                <p>You have completed <span id="review-count">0</span> review(s).</p>
+            </div>
+            
+            <div id="review-summary"></div>
+            
+            <a href="form.html" class="back-link">Submit Another Review</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="currentYear"></span> 💲 Awuah Dennis 💲. Accra, Ghana.</p>
+        <p id="lastModified"></p>
+    </footer>
+</body>
+</html>
