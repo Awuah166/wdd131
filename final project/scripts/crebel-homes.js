@@ -48,6 +48,203 @@ function currentSlide(index) {
     resetSlideInterval(); // Reset auto-advance timer
 }
 
+// Featured Gallery with Lazy Loading
+class FeaturedGallery {
+    constructor() {
+        this.galleryData = [
+            {
+                id: 1,
+                title: "Luxury Penthouse",
+                description: "Stunning city views with modern amenities",
+                imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop&crop=center",
+                price: "$950,000",
+                location: "Downtown Accra"
+            },
+            {
+                id: 2,
+                title: "Modern Family Villa",
+                description: "Spacious 4BR home with garden and pool",
+                imageUrl: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop&crop=center",
+                price: "$750,000",
+                location: "East Legon"
+            },
+            {
+                id: 3,
+                title: "Cozy Apartment",
+                description: "Perfect starter home in great neighborhood",
+                imageUrl: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&h=600&fit=crop&crop=center",
+                price: "$320,000",
+                location: "Cantonments"
+            },
+            {
+                id: 4,
+                title: "Executive Townhouse",
+                description: "Contemporary design with premium finishes",
+                imageUrl: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop&crop=center",
+                price: "$580,000",
+                location: "Airport Hills"
+            },
+            {
+                id: 5,
+                title: "Beachfront Cottage",
+                description: "Serene coastal living with ocean views",
+                imageUrl: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop&crop=center",
+                price: "$680,000",
+                location: "Tema Coast"
+            },
+            {
+                id: 6,
+                title: "Garden Estate Home",
+                description: "Elegant home with lush landscaping",
+                imageUrl: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&h=600&fit=crop&crop=center",
+                price: "$480,000",
+                location: "Adenta"
+            }
+        ];
+        
+        this.observer = null;
+        this.init();
+    }
+
+    init() {
+        this.createGallery();
+        this.setupLazyLoading();
+    }
+
+    createGallery() {
+        const gallerySection = document.getElementById('featuredGallery');
+        if (!gallerySection) return;
+
+        // Create gallery HTML structure
+        const galleryHTML = `
+            <div class="gallery-header">
+                <h2>Rent</h2>
+            </div>
+            <div class="gallery-grid" id="galleryGrid">
+                ${this.generateGalleryItems()}
+            </div>
+        `;
+
+        gallerySection.innerHTML = galleryHTML;
+    }
+
+    generateGalleryItems() {
+        return this.galleryData.map(property => `
+            <div class="gallery-item loading" data-property-id="${property.id}">
+                <img 
+                    data-src="${property.imageUrl}" 
+                    alt="${property.title}"
+                    class="lazy-image"
+                    loading="lazy"
+                >
+                <div class="gallery-overlay">
+                    <div class="gallery-info">
+                        <h3>${property.title}</h3>
+                        <p>${property.description}</p>
+                        <p><strong>${property.price}</strong> • ${property.location}</p>
+                        <button class="view-property-btn" onclick="viewPropertyDetails(${property.id})">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+                <div class="loading-text">Loading...</div>
+            </div>
+        `).join('');
+    }
+
+    setupLazyLoading() {
+        // Create intersection observer for lazy loading
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.loadImage(entry.target);
+                    this.observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin: '100px', // Start loading 100px before the image enters viewport
+            threshold: 0.1
+        });
+
+        // Observe all lazy images
+        const lazyImages = document.querySelectorAll('.lazy-image');
+        lazyImages.forEach(img => {
+            this.observer.observe(img);
+        });
+    }
+
+    loadImage(img) {
+        const galleryItem = img.closest('.gallery-item');
+        const loadingText = galleryItem.querySelector('.loading-text');
+        
+        // Show loading state
+        loadingText.textContent = 'Loading image...';
+        
+        // Create a new image to preload
+        const imageLoader = new Image();
+        
+        imageLoader.onload = () => {
+            // Image loaded successfully
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+            galleryItem.classList.remove('loading');
+            
+            // Add a small delay for smooth transition
+            setTimeout(() => {
+                if (loadingText) {
+                    loadingText.style.display = 'none';
+                }
+            }, 300);
+        };
+        
+        imageLoader.onerror = () => {
+            // Handle loading error
+            loadingText.textContent = 'Failed to load image';
+            galleryItem.classList.remove('loading');
+            
+            // Set a fallback image or placeholder
+            img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23f0f0f0"/><text x="400" y="300" font-family="Arial" font-size="24" fill="%23999" text-anchor="middle">🏠 Property Image</text></svg>';
+            img.classList.add('loaded');
+            
+            setTimeout(() => {
+                if (loadingText) {
+                    loadingText.style.display = 'none';
+                }
+            }, 300);
+        };
+        
+        // Start loading the image
+        imageLoader.src = img.dataset.src;
+    }
+}
+
+// View property details function
+function viewPropertyDetails(propertyId) {
+    const property = featuredGallery.galleryData.find(p => p.id === propertyId);
+    if (property) {
+        alert(`🏠 ${property.title}
+
+${property.description}
+
+💰 Price: ${property.price}
+📍 Location: ${property.location}
+
+This would normally open a detailed property page with:
+• High-resolution photo gallery
+• Property specifications
+• Virtual tour
+• Contact form
+• Mortgage calculator
+• Neighborhood information
+
+Contact us for more details!`);
+    }
+}
+
+// Initialize featured gallery
+let featuredGallery;
+
 // Start slideshow interval
 function startSlideshow() {
     slideInterval = setInterval(autoSlide, 5000); // Change slide every 5 seconds
@@ -489,6 +686,9 @@ document.addEventListener('DOMContentLoaded', function() {
         startSlideshow();
     }
     
+    // Initialize featured gallery with lazy loading
+    featuredGallery = new FeaturedGallery();
+    
     // Add event listener for hamburger menu
     const hamburger = document.querySelector('.hamburger');
     if (hamburger) {
@@ -591,4 +791,80 @@ window.addEventListener('resize', function() {
 // Add loading animation
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
+});
+
+// Buy Section Class
+class BuySection {
+    constructor() {
+        this.buyData = [
+            {
+                id: 7,
+                title: "Executive Mansion",
+                price: 1250000,
+                location: "East Legon Hills",
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 8,
+                title: "Modern Villa",
+                price: 980000,
+                location: "Cantonments",
+                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 9,
+                title: "Luxury Condo",
+                price: 750000,
+                location: "Airport Residential",
+                image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 10,
+                title: "Family Estate",
+                price: 650000,
+                location: "Adenta",
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&crop=center"
+            }
+        ];
+        
+        this.createBuySection();
+    }
+    
+    createBuySection() {
+        const buySection = document.getElementById('buySection');
+        if (!buySection) return;
+        
+        // Create buy section HTML structure
+        const buyHTML = `
+            <div class="buy-header">
+                <h2>Buy</h2>
+            </div>
+            <div class="buy-grid" id="buyGrid">
+                ${this.generateBuyItems()}
+            </div>
+        `;
+        
+        buySection.innerHTML = buyHTML;
+    }
+    
+    generateBuyItems() {
+        return this.buyData.map(property => `
+            <div class="buy-item">
+                <img src="${property.image}" alt="${property.title}" loading="lazy">
+                <div class="buy-overlay">
+                    <div class="buy-info">
+                        <h3>${property.title}</h3>
+                        <div class="price">$${property.price.toLocaleString()}</div>
+                        <a href="buy.html?property=${property.id}" class="view-details-btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+}
+
+// Initialize Buy Section when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize buy section
+    new BuySection();
 });
