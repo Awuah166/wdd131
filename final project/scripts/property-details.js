@@ -13,6 +13,7 @@ class PropertyDetailsPage {
         if (this.currentPropertyId) {
             this.currentProperty = this.findPropertyById(this.currentPropertyId);
             if (this.currentProperty) {
+                this.hideWelcomeSection(); // Hide welcome section when viewing specific property
                 this.renderPropertyDetails();
                 this.setupImageGallery();
                 this.setupVirtualTour();
@@ -21,6 +22,7 @@ class PropertyDetailsPage {
                 this.showPropertyNotFound();
             }
         } else {
+            this.showWelcomeSection(); // Show welcome section when viewing all properties
             this.showAllProperties();
         }
     }
@@ -740,10 +742,406 @@ class PropertyDetailsPage {
     handleContactSubmission(e) {
         const formData = new FormData(e.target);
         
-        alert(`📧 Message Sent!\n\nThank you for your interest in ${this.currentProperty.title}.\n\nOur team will contact you within 24 hours to discuss:\n• Property viewing arrangements\n• Additional property information\n• Pricing and availability\n• Next steps in the process\n\nProperty: ${this.currentProperty.title}\nLocation: ${this.currentProperty.location}\nPrice: ${this.currentProperty.price}`);
+        // Create and show styled feedback modal
+        this.showFeedbackModal();
         
         // Reset form
         e.target.reset();
+    }
+    
+    showFeedbackModal() {
+        // Remove existing modal if present
+        const existingModal = document.getElementById('feedbackModal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
+        // Create modal HTML
+        const modalHTML = `
+            <div id="feedbackModal" class="feedback-modal-overlay">
+                <div class="feedback-modal">
+                    <div class="feedback-modal-header">
+                        <div class="success-icon">✓</div>
+                        <h3>Message Sent Successfully!</h3>
+                        <button class="close-btn" onclick="propertyDetails.closeFeedbackModal()">×</button>
+                    </div>
+                    
+                    <div class="feedback-modal-body">
+                        <p class="success-message">Thank you for your interest in <strong>${this.currentProperty.title}</strong>!</p>
+                        
+                        <div class="property-summary">
+                            <div class="property-info">
+                                <h4>Property Details:</h4>
+                                <p><strong>Property:</strong> ${this.currentProperty.title}</p>
+                                <p><strong>Location:</strong> ${this.currentProperty.location}</p>
+                                <p><strong>Price:</strong> ${this.currentProperty.price}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="next-steps">
+                            <h4>What happens next?</h4>
+                            <ul>
+                                <li>📞 Our team will contact you within 24 hours</li>
+                                <li>🏠 We'll discuss property viewing arrangements</li>
+                                <li>📋 Provide additional property information</li>
+                                <li>💰 Discuss pricing and availability</li>
+                                <li>🤝 Guide you through the next steps</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <p><strong>Need immediate assistance?</strong></p>
+                            <p>📞 Call us: +233 50 782 4815</p>
+                            <p>📧 Email: info@crebelhomes.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feedback-modal-footer">
+                        <button class="btn-primary" onclick="propertyDetails.closeFeedbackModal()">
+                            Continue Browsing
+                        </button>
+                        <button class="btn-secondary" onclick="window.location.href='properties.html'">
+                            View More Properties
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add modal to page
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Add CSS styles
+        this.addFeedbackModalStyles();
+        
+        // Show modal with animation
+        setTimeout(() => {
+            const modal = document.getElementById('feedbackModal');
+            if (modal) {
+                modal.classList.add('show');
+            }
+        }, 10);
+        
+        // Close modal when clicking outside
+        document.getElementById('feedbackModal').addEventListener('click', (e) => {
+            if (e.target.id === 'feedbackModal') {
+                this.closeFeedbackModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeFeedbackModal();
+            }
+        });
+    }
+    
+    closeFeedbackModal() {
+        const modal = document.getElementById('feedbackModal');
+        if (modal) {
+            modal.classList.add('hide');
+            setTimeout(() => {
+                modal.remove();
+            }, 300);
+        }
+    }
+    
+    addFeedbackModalStyles() {
+        // Check if styles already exist
+        if (document.getElementById('feedbackModalStyles')) {
+            return;
+        }
+        
+        const styles = `
+            <style id="feedbackModalStyles">
+                .feedback-modal-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.6);
+                    backdrop-filter: blur(5px);
+                    z-index: 10000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    opacity: 0;
+                    transition: all 0.3s ease;
+                }
+                
+                .feedback-modal-overlay.show {
+                    opacity: 1;
+                }
+                
+                .feedback-modal-overlay.hide {
+                    opacity: 0;
+                }
+                
+                .feedback-modal {
+                    background: white;
+                    border-radius: 20px;
+                    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+                    max-width: 600px;
+                    width: 90%;
+                    max-height: 90vh;
+                    overflow-y: auto;
+                    transform: scale(0.7) translateY(50px);
+                    transition: all 0.3s ease;
+                    animation: modalSlideIn 0.4s ease-out forwards;
+                }
+                
+                .feedback-modal-overlay.show .feedback-modal {
+                    transform: scale(1) translateY(0);
+                }
+                
+                .feedback-modal-overlay.hide .feedback-modal {
+                    transform: scale(0.8) translateY(30px);
+                }
+                
+                @keyframes modalSlideIn {
+                    from {
+                        transform: scale(0.7) translateY(50px);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: scale(1) translateY(0);
+                        opacity: 1;
+                    }
+                }
+                
+                .feedback-modal-header {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                    padding: 2rem;
+                    border-radius: 20px 20px 0 0;
+                    text-align: center;
+                    position: relative;
+                }
+                
+                .success-icon {
+                    background: rgba(255, 255, 255, 0.2);
+                    border: 3px solid white;
+                    border-radius: 50%;
+                    width: 80px;
+                    height: 80px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 2.5rem;
+                    margin: 0 auto 1rem;
+                    animation: successPulse 0.6s ease-out;
+                }
+                
+                @keyframes successPulse {
+                    0% { transform: scale(0); }
+                    50% { transform: scale(1.1); }
+                    100% { transform: scale(1); }
+                }
+                
+                .feedback-modal-header h3 {
+                    margin: 0;
+                    font-size: 1.8rem;
+                    font-weight: bold;
+                }
+                
+                .close-btn {
+                    position: absolute;
+                    top: 15px;
+                    right: 20px;
+                    background: rgba(255, 255, 255, 0.2);
+                    border: none;
+                    color: white;
+                    font-size: 2rem;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s ease;
+                }
+                
+                .close-btn:hover {
+                    background: rgba(255, 255, 255, 0.3);
+                    transform: rotate(90deg);
+                }
+                
+                .feedback-modal-body {
+                    padding: 2rem;
+                }
+                
+                .success-message {
+                    font-size: 1.2rem;
+                    color: #2c3e50;
+                    text-align: center;
+                    margin-bottom: 2rem;
+                }
+                
+                .property-summary {
+                    background: #f8f9fa;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    margin-bottom: 2rem;
+                    border-left: 4px solid #667eea;
+                }
+                
+                .property-info h4 {
+                    color: #667eea;
+                    margin-bottom: 1rem;
+                    font-size: 1.1rem;
+                }
+                
+                .property-info p {
+                    margin: 0.5rem 0;
+                    color: #555;
+                }
+                
+                .next-steps {
+                    margin-bottom: 2rem;
+                }
+                
+                .next-steps h4 {
+                    color: #2c3e50;
+                    margin-bottom: 1rem;
+                    font-size: 1.1rem;
+                }
+                
+                .next-steps ul {
+                    list-style: none;
+                    padding: 0;
+                }
+                
+                .next-steps li {
+                    background: #f8f9fa;
+                    padding: 0.8rem 1rem;
+                    margin: 0.5rem 0;
+                    border-radius: 8px;
+                    border-left: 3px solid #28a745;
+                    color: #555;
+                }
+                
+                .contact-info {
+                    background: #e3f2fd;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    text-align: center;
+                    border: 1px solid #bbdefb;
+                }
+                
+                .contact-info p {
+                    margin: 0.5rem 0;
+                    color: #1565c0;
+                }
+                
+                .contact-info p:first-child {
+                    font-weight: bold;
+                    color: #0d47a1;
+                }
+                
+                .feedback-modal-footer {
+                    padding: 1.5rem 2rem 2rem;
+                    display: flex;
+                    gap: 1rem;
+                    justify-content: center;
+                }
+                
+                .feedback-modal-footer button {
+                    padding: 0.8rem 1.5rem;
+                    border-radius: 8px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    border: none;
+                    font-size: 1rem;
+                }
+                
+                .btn-primary {
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    color: white;
+                }
+                
+                .btn-primary:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+                }
+                
+                .btn-secondary {
+                    background: #f8f9fa;
+                    color: #667eea;
+                    border: 2px solid #667eea;
+                }
+                
+                .btn-secondary:hover {
+                    background: #667eea;
+                    color: white;
+                    transform: translateY(-2px);
+                    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
+                }
+                
+                /* Mobile Responsive */
+                @media (max-width: 768px) {
+                    .feedback-modal {
+                        width: 95%;
+                        margin: 1rem;
+                    }
+                    
+                    .feedback-modal-header {
+                        padding: 1.5rem;
+                    }
+                    
+                    .success-icon {
+                        width: 60px;
+                        height: 60px;
+                        font-size: 2rem;
+                    }
+                    
+                    .feedback-modal-header h3 {
+                        font-size: 1.5rem;
+                    }
+                    
+                    .feedback-modal-body {
+                        padding: 1.5rem;
+                    }
+                    
+                    .feedback-modal-footer {
+                        flex-direction: column;
+                        padding: 1rem 1.5rem 1.5rem;
+                    }
+                    
+                    .feedback-modal-footer button {
+                        width: 100%;
+                    }
+                }
+                
+                @media (max-width: 480px) {
+                    .feedback-modal {
+                        width: 98%;
+                        margin: 0.5rem;
+                    }
+                    
+                    .feedback-modal-header {
+                        padding: 1rem;
+                    }
+                    
+                    .feedback-modal-body {
+                        padding: 1rem;
+                    }
+                    
+                    .property-summary {
+                        padding: 1rem;
+                    }
+                    
+                    .contact-info {
+                        padding: 1rem;
+                    }
+                }
+            </style>
+        `;
+        
+        document.head.insertAdjacentHTML('beforeend', styles);
     }
     
     getWalkScoreText(score) {
@@ -788,11 +1186,6 @@ class PropertyDetailsPage {
         if (mainContent) {
             mainContent.innerHTML = `
                 <div class="all-properties-container">
-                    <div class="properties-header">
-                        <h1>All Properties</h1>
-                        <p>Browse our complete collection of available properties</p>
-                    </div>
-                    
                     <div class="properties-filter">
                         <button class="filter-btn active" onclick="propertyDetails.filterProperties('all')">All</button>
                         <button class="filter-btn" onclick="propertyDetails.filterProperties('rent')">For Rent</button>
@@ -839,6 +1232,21 @@ class PropertyDetailsPage {
                 card.style.display = 'none';
             }
         });
+    }
+    
+    // Helper methods to show/hide welcome section
+    showWelcomeSection() {
+        const welcomeSection = document.querySelector('.welcome-section');
+        if (welcomeSection) {
+            welcomeSection.style.display = 'block';
+        }
+    }
+    
+    hideWelcomeSection() {
+        const welcomeSection = document.querySelector('.welcome-section');
+        if (welcomeSection) {
+            welcomeSection.style.display = 'none';
+        }
     }
 }
 
