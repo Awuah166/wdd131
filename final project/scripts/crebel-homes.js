@@ -58,7 +58,10 @@ class FeaturedGallery {
                 description: "Stunning city views with modern amenities",
                 imageUrl: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop&crop=center",
                 price: "$950,000",
-                location: "Downtown Accra"
+                priceNumeric: 950000,
+                location: "Downtown Accra",
+                bedrooms: 3,
+                type: "rent"
             },
             {
                 id: 2,
@@ -66,7 +69,10 @@ class FeaturedGallery {
                 description: "Spacious 4BR home with garden and pool",
                 imageUrl: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop&crop=center",
                 price: "$750,000",
-                location: "East Legon"
+                priceNumeric: 750000,
+                location: "East Legon",
+                bedrooms: 4,
+                type: "rent"
             },
             {
                 id: 3,
@@ -74,7 +80,10 @@ class FeaturedGallery {
                 description: "Perfect starter home in great neighborhood",
                 imageUrl: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=800&h=600&fit=crop&crop=center",
                 price: "$320,000",
-                location: "Cantonments"
+                priceNumeric: 320000,
+                location: "Cantonments",
+                bedrooms: 2,
+                type: "rent"
             },
             {
                 id: 4,
@@ -82,7 +91,10 @@ class FeaturedGallery {
                 description: "Contemporary design with premium finishes",
                 imageUrl: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&h=600&fit=crop&crop=center",
                 price: "$580,000",
-                location: "Airport Hills"
+                priceNumeric: 580000,
+                location: "Airport Hills",
+                bedrooms: 3,
+                type: "rent"
             },
             {
                 id: 5,
@@ -90,7 +102,10 @@ class FeaturedGallery {
                 description: "Serene coastal living with ocean views",
                 imageUrl: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop&crop=center",
                 price: "$680,000",
-                location: "Tema Coast"
+                priceNumeric: 680000,
+                location: "Tema Coast",
+                bedrooms: 3,
+                type: "rent"
             },
             {
                 id: 6,
@@ -98,7 +113,10 @@ class FeaturedGallery {
                 description: "Elegant home with lush landscaping",
                 imageUrl: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?w=800&h=600&fit=crop&crop=center",
                 price: "$480,000",
-                location: "Adenta"
+                priceNumeric: 480000,
+                location: "Adenta",
+                bedrooms: 4,
+                type: "rent"
             }
         ];
         
@@ -141,7 +159,7 @@ class FeaturedGallery {
                     <div class="gallery-info">
                         <h3>${property.title}</h3>
                         <p>${property.description}</p>
-                        <p><strong>${property.price}</strong> • ${property.location}</p>
+                        <p><strong>${property.price}</strong> • ${property.bedrooms} BR • ${property.location}</p>
                         <button class="view-property-btn" onclick="viewPropertyDetails(${property.id})">
                             View Details
                         </button>
@@ -221,25 +239,8 @@ class FeaturedGallery {
 
 // View property details function
 function viewPropertyDetails(propertyId) {
-    const property = featuredGallery.galleryData.find(p => p.id === propertyId);
-    if (property) {
-        alert(`🏠 ${property.title}
-
-${property.description}
-
-💰 Price: ${property.price}
-📍 Location: ${property.location}
-
-This would normally open a detailed property page with:
-• High-resolution photo gallery
-• Property specifications
-• Virtual tour
-• Contact form
-• Mortgage calculator
-• Neighborhood information
-
-Contact us for more details!`);
-    }
+    // Redirect to properties page with property ID
+    window.location.href = `properties.html?id=${propertyId}`;
 }
 
 // Initialize featured gallery
@@ -314,78 +315,60 @@ function showSearchResults(searchData) {
 
 // Generate sample properties based on search criteria
 function generateSampleProperties(searchData) {
+    // Get all properties from both rent and buy sections
+    const featuredGallery = window.featuredGalleryInstance || { galleryData: [] };
+    const buySection = window.buySectionInstance || { buyData: [] };
+    
+    // Combine all properties and normalize data structure
     const allProperties = [
-        {
-            id: 1,
-            title: "Modern Downtown Apartment",
-            type: "apartment",
-            bedrooms: 2,
-            price: 320000,
-            location: "Downtown",
-            image: "apartment1.jpg",
-            features: ["Gym", "Pool", "Parking", "24/7 Security"]
-        },
-        {
-            id: 2,
-            title: "Luxury Family Villa",
-            type: "villa",
-            bedrooms: 4,
-            price: 750000,
-            location: "Suburbs",
-            image: "villa1.jpg",
-            features: ["Garden", "Garage", "Fireplace", "Study Room"]
-        },
-        {
-            id: 3,
-            title: "Cozy Studio Condo",
-            type: "condo",
-            bedrooms: 1,
-            price: 180000,
-            location: "City Center",
-            image: "condo1.jpg",
-            features: ["Balcony", "Gym", "Rooftop Access"]
-        },
-        {
-            id: 4,
-            title: "Spacious 3BR House",
-            type: "house",
-            bedrooms: 3,
-            price: 450000,
-            location: "Residential Area",
-            image: "house1.jpg",
-            features: ["Backyard", "Garage", "Office", "Storage"]
-        },
-        {
-            id: 5,
-            title: "Executive Penthouse",
-            type: "apartment",
-            bedrooms: 3,
-            price: 950000,
-            location: "Downtown",
-            image: "penthouse1.jpg",
-            features: ["City View", "Terrace", "Concierge", "Wine Cellar"]
-        },
-        {
-            id: 6,
-            title: "Charming Townhouse",
-            type: "townhouse",
-            bedrooms: 2,
-            price: 380000,
-            location: "Historic District",
-            image: "townhouse1.jpg",
-            features: ["Patio", "Fireplace", "Updated Kitchen"]
-        }
+        // Rent properties (from featured gallery)
+        ...featuredGallery.galleryData.map(property => ({
+            id: property.id,
+            title: property.title,
+            type: getPropertyTypeFromTitle(property.title),
+            bedrooms: property.bedrooms,
+            price: property.priceNumeric || parsePrice(property.price),
+            location: property.location,
+            image: property.imageUrl,
+            features: ["Modern Amenities", "Great Location", "Quality Finishes"],
+            category: "rent"
+        })),
+        
+        // Buy properties
+        ...buySection.buyData.map(property => ({
+            id: property.id,
+            title: property.title,
+            type: getPropertyTypeFromTitle(property.title),
+            bedrooms: property.bedrooms,
+            price: property.price,
+            location: property.location,
+            image: property.image,
+            features: ["Premium Features", "Investment Opportunity", "Prime Location"],
+            category: "buy"
+        }))
     ];
     
     // Filter properties based on search criteria
     let filteredProperties = allProperties;
     
-    if (searchData.propertyType) {
+    // Filter by location/keywords
+    if (searchData.location) {
+        const searchTerm = searchData.location.toLowerCase();
         filteredProperties = filteredProperties.filter(p => 
-            p.type.toLowerCase() === searchData.propertyType.toLowerCase()
+            p.location.toLowerCase().includes(searchTerm) ||
+            p.title.toLowerCase().includes(searchTerm) ||
+            p.type.toLowerCase().includes(searchTerm)
         );
     }
     
+    // Filter by property type
+    if (searchData.propertyType) {
+        filteredProperties = filteredProperties.filter(p => 
+            p.type.toLowerCase().includes(searchData.propertyType.toLowerCase())
+        );
+    }
+    
+    // Filter by bedrooms
     if (searchData.bedrooms) {
         const bedroomNum = parseInt(searchData.bedrooms);
         filteredProperties = filteredProperties.filter(p => 
@@ -393,6 +376,7 @@ function generateSampleProperties(searchData) {
         );
     }
     
+    // Filter by price range
     if (searchData.priceRange) {
         const [min, max] = searchData.priceRange.split('-').map(p => parseInt(p.replace('+', '')));
         filteredProperties = filteredProperties.filter(p => {
@@ -403,16 +387,23 @@ function generateSampleProperties(searchData) {
         });
     }
     
-    if (searchData.location) {
-        const searchTerm = searchData.location.toLowerCase();
-        filteredProperties = filteredProperties.filter(p => 
-            p.location.toLowerCase().includes(searchTerm) ||
-            p.title.toLowerCase().includes(searchTerm) ||
-            p.type.toLowerCase().includes(searchTerm)
-        );
-    }
-    
     return filteredProperties;
+}
+
+// Helper function to extract property type from title
+function getPropertyTypeFromTitle(title) {
+    const titleLower = title.toLowerCase();
+    if (titleLower.includes('apartment') || titleLower.includes('penthouse')) return 'apartment';
+    if (titleLower.includes('villa')) return 'villa';
+    if (titleLower.includes('condo')) return 'condo';
+    if (titleLower.includes('townhouse')) return 'townhouse';
+    if (titleLower.includes('cottage') || titleLower.includes('house') || titleLower.includes('home') || titleLower.includes('estate') || titleLower.includes('mansion')) return 'house';
+    return 'house'; // default
+}
+
+// Helper function to parse price string to number
+function parsePrice(priceString) {
+    return parseInt(priceString.replace(/[$,]/g, ''));
 }
 
 // Create enhanced search results modal
@@ -524,7 +515,8 @@ function closeSearchResultsModal() {
 
 // Show individual property details
 function showPropertyDetails(propertyId) {
-    alert(`🏠 Property Details\n\nProperty ID: ${propertyId}\n\nThis would normally show detailed property information, photos, virtual tour, contact form, etc.\n\nIn a real application, this would open a detailed property page or modal.`);
+    // Redirect to properties page with property ID
+    window.location.href = `properties.html?id=${propertyId}`;
 }
 
 // Enhanced search form submission
@@ -686,9 +678,6 @@ document.addEventListener('DOMContentLoaded', function() {
         startSlideshow();
     }
     
-    // Initialize featured gallery with lazy loading
-    featuredGallery = new FeaturedGallery();
-    
     // Add event listener for hamburger menu
     const hamburger = document.querySelector('.hamburger');
     if (hamburger) {
@@ -802,32 +791,41 @@ class BuySection {
                 title: "Executive Mansion",
                 price: 1250000,
                 location: "East Legon Hills",
-                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop&crop=center"
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=400&h=300&fit=crop&crop=center",
+                bedrooms: 5,
+                type: "buy"
             },
             {
                 id: 8,
                 title: "Modern Villa",
                 price: 980000,
                 location: "Cantonments",
-                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop&crop=center"
+                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop&crop=center",
+                bedrooms: 4,
+                type: "buy"
             },
             {
                 id: 9,
                 title: "Luxury Condo",
                 price: 750000,
                 location: "Airport Residential",
-                image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop&crop=center"
+                image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop&crop=center",
+                bedrooms: 3,
+                type: "buy"
             },
             {
                 id: 10,
                 title: "Family Estate",
                 price: 650000,
                 location: "Adenta",
-                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&crop=center"
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop&crop=center",
+                bedrooms: 4,
+                type: "buy"
             }
         ];
         
         this.createBuySection();
+        this.setupLazyLoading();
     }
     
     createBuySection() {
@@ -849,22 +847,313 @@ class BuySection {
     
     generateBuyItems() {
         return this.buyData.map(property => `
-            <div class="buy-item">
-                <img src="${property.image}" alt="${property.title}" loading="lazy">
+            <div class="buy-item loading" data-property-id="${property.id}">
+                <img 
+                    data-src="${property.image}" 
+                    alt="${property.title}"
+                    class="lazy-image"
+                    loading="lazy"
+                >
                 <div class="buy-overlay">
                     <div class="buy-info">
                         <h3>${property.title}</h3>
+                        <p>${property.bedrooms} BR • ${property.location}</p>
                         <div class="price">$${property.price.toLocaleString()}</div>
-                        <a href="buy.html?property=${property.id}" class="view-details-btn">View Details</a>
+                        <a href="properties.html?id=${property.id}" class="view-details-btn">View Details</a>
                     </div>
                 </div>
+                <div class="loading-text">Loading...</div>
             </div>
         `).join('');
+    }
+
+    setupLazyLoading() {
+        // Create intersection observer for lazy loading
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.loadImage(entry.target);
+                    this.observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            rootMargin: '50px'
+        });
+
+        // Observe all buy items
+        document.querySelectorAll('.buy-item.loading').forEach(item => {
+            this.observer.observe(item);
+        });
+    }
+
+    loadImage(buyItem) {
+        const img = buyItem.querySelector('.lazy-image');
+        const loadingText = buyItem.querySelector('.loading-text');
+        
+        if (img && img.dataset.src) {
+            img.onload = () => {
+                img.classList.add('loaded');
+                buyItem.classList.remove('loading');
+                if (loadingText) {
+                    loadingText.style.display = 'none';
+                }
+            };
+            
+            img.onerror = () => {
+                buyItem.classList.remove('loading');
+                if (loadingText) {
+                    loadingText.textContent = 'Failed to load';
+                    loadingText.style.color = '#999';
+                }
+            };
+            
+            img.src = img.dataset.src;
+        }
     }
 }
 
 // Initialize Buy Section when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize buy section
-    new BuySection();
+    // Initialize sections and store global references for search functionality
+    window.featuredGalleryInstance = new FeaturedGallery();
+    window.buySectionInstance = new BuySection();
+    window.mapInstance = new PropertyMap();
 });
+
+// Property Map Class
+class PropertyMap {
+    constructor() {
+        this.accraCoordinates = {
+            lat: 5.6037,
+            lng: -0.1870
+        };
+        
+        this.locationCoordinates = {
+            "Downtown Accra": { lat: 5.5502, lng: -0.2174 },
+            "East Legon": { lat: 5.6507, lng: -0.1286 },
+            "Cantonments": { lat: 5.5679, lng: -0.1986 },
+            "Airport Hills": { lat: 5.6047, lng: -0.1435 },
+            "Tema Coast": { lat: 5.6698, lng: 0.0173 },
+            "Adenta": { lat: 5.7095, lng: -0.1578 },
+            "East Legon Hills": { lat: 5.6580, lng: -0.1200 },
+            "Airport Residential": { lat: 5.6100, lng: -0.1400 }
+        };
+        
+        this.createMap();
+    }
+    
+    createMap() {
+        const mapContainer = document.getElementById('mapContainer');
+        if (!mapContainer) return;
+        
+        // Create real map HTML structure with Leaflet
+        const mapHTML = `
+            <div class="real-map-container">
+                <div class="map-header-overlay">
+                    <h3>🌍 Our Properties in Accra, Ghana</h3>
+                    <p>Explore our premium properties across Accra's most desirable neighborhoods</p>
+                </div>
+                <div id="leafletMap" class="leaflet-map"></div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend-color rent"></span>
+                        <span>Available for Rent</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color buy"></span>
+                        <span>Available for Sale</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        mapContainer.innerHTML = mapHTML;
+        this.initializeLeafletMap();
+        this.addMapInteractivity();
+    }
+    
+    initializeLeafletMap() {
+        // Load Leaflet CSS and JS if not already loaded
+        if (!window.L) {
+            this.loadLeafletLibrary().then(() => {
+                this.createLeafletMap();
+            });
+        } else {
+            this.createLeafletMap();
+        }
+    }
+    
+    loadLeafletLibrary() {
+        return new Promise((resolve) => {
+            // Load CSS
+            const cssLink = document.createElement('link');
+            cssLink.rel = 'stylesheet';
+            cssLink.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+            document.head.appendChild(cssLink);
+            
+            // Load JS
+            const script = document.createElement('script');
+            script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+            script.onload = resolve;
+            document.head.appendChild(script);
+        });
+    }
+    
+    createLeafletMap() {
+        const mapElement = document.getElementById('leafletMap');
+        if (!mapElement || !window.L) return;
+        
+        // Initialize map
+        const map = L.map('leafletMap').setView([this.accraCoordinates.lat, this.accraCoordinates.lng], 11);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // Add property markers
+        this.addPropertyMarkers(map);
+        
+        // Store map reference
+        this.map = map;
+    }
+    
+    addPropertyMarkers(map) {
+        const allProperties = [
+            ...window.featuredGalleryInstance.galleryData,
+            ...window.buySectionInstance.buyData
+        ];
+        
+        allProperties.forEach(property => {
+            const coords = this.locationCoordinates[property.location];
+            if (!coords) return;
+            
+            const price = property.priceNumeric || property.price;
+            const formattedPrice = typeof price === 'number' ? 
+                `$${price.toLocaleString()}` : price;
+            
+            // Create custom marker icon
+            const markerIcon = L.divIcon({
+                className: `custom-marker ${property.type}`,
+                html: `<div class="marker-content">
+                         <span class="marker-number">${property.bedrooms}</span>
+                       </div>`,
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+            
+            // Create marker
+            const marker = L.marker([coords.lat, coords.lng], { icon: markerIcon }).addTo(map);
+            
+            // Create popup content
+            const popupContent = `
+                <div class="marker-popup">
+                    <h4>${property.title}</h4>
+                    <p><strong>💰 ${formattedPrice}</strong></p>
+                    <p>🛏️ ${property.bedrooms} Bedrooms</p>
+                    <p>📍 ${property.location}</p>
+                    <p>🏷️ ${property.type === 'rent' ? 'For Rent' : 'For Sale'}</p>
+                    <button onclick="window.mapInstance.showPropertyDetails('${property.id}')" class="popup-btn">
+                        View Details
+                    </button>
+                </div>
+            `;
+            
+            marker.bindPopup(popupContent);
+        });
+    }
+    
+    generateLocationList() {
+        const allProperties = [
+            ...window.featuredGalleryInstance.galleryData,
+            ...window.buySectionInstance.buyData
+        ];
+        
+        // Group properties by location
+        const locationGroups = {};
+        allProperties.forEach(property => {
+            if (!locationGroups[property.location]) {
+                locationGroups[property.location] = [];
+            }
+            locationGroups[property.location].push(property);
+        });
+        
+        return Object.entries(locationGroups).map(([location, properties]) => {
+            const rentProperties = properties.filter(p => p.type === 'rent');
+            const buyProperties = properties.filter(p => p.type === 'buy');
+            
+            return `
+                <div class="location-group" data-location="${location}">
+                    <h4>📍 ${location}</h4>
+                    <div class="location-stats">
+                        ${rentProperties.length > 0 ? `<span class="stat rent-stat">${rentProperties.length} for Rent</span>` : ''}
+                        ${buyProperties.length > 0 ? `<span class="stat buy-stat">${buyProperties.length} for Sale</span>` : ''}
+                    </div>
+                    <div class="location-properties">
+                        ${properties.map(property => {
+                            const price = property.priceNumeric || property.price;
+                            const formattedPrice = typeof price === 'number' ? 
+                                `$${price.toLocaleString()}` : price;
+                            return `
+                                <div class="location-property ${property.type}" onclick="window.mapInstance.showPropertyDetails('${property.id}')">
+                                    <span class="property-title">${property.title}</span>
+                                    <span class="property-price">${formattedPrice}</span>
+                                    <span class="property-beds">🛏️ ${property.bedrooms} BR</span>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    addMapInteractivity() {
+        // Add hover effects to location groups
+        const locationGroups = document.querySelectorAll('.location-group');
+        locationGroups.forEach(group => {
+            group.addEventListener('mouseenter', () => {
+                group.classList.add('highlighted');
+            });
+            
+            group.addEventListener('mouseleave', () => {
+                group.classList.remove('highlighted');
+            });
+        });
+    }
+    
+    generateMarkers() {
+        const allProperties = [
+            ...window.featuredGalleryInstance.galleryData,
+            ...window.buySectionInstance.buyData
+        ];
+        
+        return allProperties.map(property => {
+            const location = this.mapLocations[property.location];
+            if (!location) return '';
+            
+            const price = property.priceNumeric || property.price;
+            const formattedPrice = typeof price === 'number' ? 
+                `$${price.toLocaleString()}` : price;
+            
+            return `
+                <div class="property-marker ${property.type}" 
+                     style="left: ${location.x}%; top: ${location.y}%;"
+                     data-property-id="${property.id}"
+                     onclick="window.mapInstance.showPropertyDetails('${property.id}')">
+                    ${property.bedrooms}
+                    <div class="marker-tooltip">
+                        ${property.title}<br>
+                        ${formattedPrice} • ${property.bedrooms} BR<br>
+                        📍 ${property.location}
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    showPropertyDetails(propertyId) {
+        // Redirect to properties page with property ID
+        window.location.href = `properties.html?id=${propertyId}`;
+    }
+}
