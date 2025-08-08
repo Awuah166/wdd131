@@ -1695,6 +1695,7 @@ body {
     width: 24px;
     height: 24px;
     fill: white;
+    color: white; /* Fallback for non-SVG icons */
     transition: all 0.3s ease;
 }
 
