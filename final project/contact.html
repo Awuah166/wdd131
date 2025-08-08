@@ -17,20 +17,10 @@
         <!-- IMAGE SLIDESHOW BACKGROUND -->
         <div class="slideshow-container">
             <div class="slide active">
-                <img src="Images/frames-for-your-heart.png" alt="Beautiful Family Home">
+                <img src="https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29udGFjdCUyMHVzfGVufDB8fDB8fHww" alt="Beautiful Family Home">
                 <div class="slide-overlay"></div>
             </div>
             
-            <div class="slide">
-                <img src="Images/Reduced Size House Image.png" alt="Modern Apartment">
-                <div class="slide-overlay"></div>
-            </div>
-            
-            <div class="slide">
-                <img src="Images/Reduced Size Image (1).png" alt="Cozy Family Home">
-                <div class="slide-overlay"></div>
-            </div>
-        </div>
 
         <!-- NAVIGATION BAR (positioned over slideshow) -->
         <nav class="navbar">
@@ -59,26 +49,44 @@
 
         <!-- HERO CONTENT -->
         <div class="hero-content">
-            <h1>Find Your Perfect Home</h1>
-            <p>Your journey to homeownership starts here</p>
-            <button class="search-button" id="hero-search-btn">
-                🔍 Search Properties
-            </button>
-        </div>
-
-        <!-- SLIDESHOW CONTROLS -->
-        <div class="slideshow-controls">
-            <button class="prev-btn" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next-btn" onclick="changeSlide(1)">&#10095;</button>
-        </div>
-
-        <!-- SLIDE INDICATORS -->
-        <div class="slide-indicators">
-            <span class="indicator active" onclick="currentSlide(1)"></span>
-            <span class="indicator" onclick="currentSlide(2)"></span>
-            <span class="indicator" onclick="currentSlide(3)"></span>
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you! Reach out for inquiries or support.</p>
         </div>
     </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>Discover a world of boutique luxury real estate services. Leave your details in the contact 
+                form to explore unique properties, tailored to your needs and lifestyle. Let’s start your 
+                journey today. Let’s make contact.</p>
+            <ul>
+                <li>📧Email: info@crebelhomes.com</li>
+                <li>📞Phone: (123) 456-7890</li>
+                <li>🏠Address: 123 Main St, Anytown, USA</li>
+            </ul>
+        </section>
+
+        <section class="contact-form">
+            <h2>Contact Us</h2>
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </section>
+
+    </main>
 
     <footer class="footer">
         <div class="footer-content">
