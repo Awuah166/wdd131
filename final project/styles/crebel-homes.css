@@ -1694,8 +1694,10 @@ body {
 .social-links svg {
     width: 24px;
     height: 24px;
-    fill: white;
-    color: white; /* Fallback for non-SVG icons */
+    /* Method 1: Using CSS filter to make any color white */
+    filter: brightness(0) invert(1);
+    /* Method 2: Alternative using color property for icon fonts */
+    color: white;
     transition: all 0.3s ease;
 }
 
